@@ -1,0 +1,8 @@
+{
+  "name": "dualsound-cat",
+  "app_id": "9dde69db",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
