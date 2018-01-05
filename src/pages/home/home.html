@@ -3,16 +3,32 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Dualcat sounds</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-list>
+    <ion-item>
+      <ion-list no-lines>
+        <ion-item text-center>
+          <button ion-button icon-left large>
+            <ion-icon name="musical-note"></ion-icon>
+            Dual Sound
+          </button>
+        </ion-item>
+        <ion-item text-center>
+          <button ion-button icon-left color="dark" large>
+            <ion-icon name="musical-notes"></ion-icon>
+            Cat Sound
+          </button>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+    <ion-item text-center>
+      <button ion-button round menuToggle color="light">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

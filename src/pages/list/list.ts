@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -9,8 +11,10 @@ export class ListPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
+  playSounds: boolean;
+  playMusic: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -26,6 +30,26 @@ export class ListPage {
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
+
+    storage.get('playMusic').then((val) => {
+      if (!!val) {
+        storage.set('playMusic', true)
+        this.playMusic = true
+      } else {
+        this.playMusic = val
+      }
+      console.log('local playMusic : ', this.playMusic)
+    })
+
+    storage.get('playSounds').then((val) => {
+      if (!!val) {
+        storage.set('playSounds', true)
+        this.playSounds = true
+      } else {
+        this.playSounds = val
+      }
+      console.log('local playSounds : ', this.playSounds)
+    })
   }
 
   itemTapped(event, item) {
@@ -33,5 +57,19 @@ export class ListPage {
     this.navCtrl.push(ListPage, {
       item: item
     });
+  }
+
+  toggleMusic(event){
+    this.storage.set('playMusic', this.playMusic)
+    // TODO
+    // change icon
+    // sore into local storage
+  }
+
+  toggleSounds(event){
+    this.storage.set('playSounds', this.playSounds)
+    // TODO
+    // change icon
+    // store into local storage
   }
 }
