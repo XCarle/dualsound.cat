@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   selector: 'page-list',
@@ -14,7 +15,7 @@ export class ListPage {
   playSounds: boolean;
   playMusic: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public audio: NativeAudio) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -60,16 +61,19 @@ export class ListPage {
   }
 
   toggleMusic(event){
-    this.storage.set('playMusic', this.playMusic)
-    // TODO
-    // change icon
-    // sore into local storage
+    this.storage.set('playMusic', this.playMusic).then( (val) => {
+      console.log('should set up music')
+      if (val) {
+        console.log('should loop music')
+        this.audio.loop('bird')
+      } else {
+        console.log('should stop music')
+        this.audio.stop('bird')
+      }
+    })
   }
 
   toggleSounds(event){
     this.storage.set('playSounds', this.playSounds)
-    // TODO
-    // change icon
-    // store into local storage
   }
 }

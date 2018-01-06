@@ -8,6 +8,8 @@ import { ListPage } from '../pages/list/list';
 
 import { NativeAudio } from '@ionic-native/native-audio';
 
+import { Storage } from '@ionic/storage';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -18,7 +20,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public audio: NativeAudio) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public audio: NativeAudio, private storage: Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,9 +37,15 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.audio.preloadSimple('uniqueId1', 'assets/audio/Meowing-cat.mp3');
-      //this.audio.play('uniqueId1', () => console.log('uniqueId1 is done playing'));
-      this.audio.loop('uniqueId1').then((val) => { console.log('audio loop success : ', val)}, (err) => console.log('audio loop error : ', err))
+      this.audio.preloadSimple('bird', 'assets/audio/Bird-singing-in-the-forest.mp3');
+      this.audio.preloadSimple('cat', 'assets/audio/Meowing-cat.mp3');
+      this.audio.preloadSimple('bells', 'assets/audio/Shopkeepers-bell.mp3');
+
+      this.storage.get('playMusic').then((val) => {
+        if (!!val) {
+          this.audio.loop('bird').then((val) => { console.log('audio loop success : ', val)}, (err) => console.log('audio loop error : ', err))
+        }
+      })
     });
   }
 
