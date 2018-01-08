@@ -12,22 +12,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { NativeAudio } from '@ionic-native/native-audio';
-//import { NativeAudioMock } from '@ionic-native-mocks/native-audio';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
-//
-// class NativeAudioMock extends NativeAudio {
-//   preloadSimple(options) {
-//     return new Promise((resolve, reject) => {
-//       resolve("BASE_64_ENCODED_DATA_GOES_HERE");
-//     })
-//   }
-//
-//   play(options) {
-//     return new Promise((resolve, reject) => {
-//       resolve("BASE_64_ENCODED_DATA_GOES_HERE");
-//     })
-//   }
-// }
+import { AudioServiceProvider } from '../providers/audio-service/audio-service';
 
 @NgModule({
   declarations: [
@@ -50,9 +36,9 @@ import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
     StatusBar,
     SplashScreen,
     SmartAudioProvider,
+    AudioServiceProvider,
     NativeAudio,
-    //{provide: NativeAudio, useClass: NativeAudioMock},
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

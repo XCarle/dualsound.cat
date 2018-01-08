@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { NativeAudio } from '@ionic-native/native-audio';
-import { Storage } from '@ionic/storage';
+import { AudioServiceProvider } from '../../providers/audio-service/audio-service';
 
 @Component({
   selector: 'page-home',
@@ -10,25 +9,15 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public audio: NativeAudio, public storage: Storage) {
+  constructor(public navCtrl: NavController, public audio: AudioServiceProvider) {
 
   }
 
   selectMusicalNotes() {
-    console.log('selectMusicalNotes')
-    this.storage.get('playSounds').then((val) => {
-      if (!!val) {
-          this.audio.play('bells', () => console.log('Bells is done playing'))
-      }
-    })
+    this.audio.play('bells')
   }
 
   selectMusicalNote() {
-    console.log('selectMusicalNote')
-    this.storage.get('playSounds').then((val) => {
-      if (!!val) {
-        this.audio.play('cat', () => console.log('Cat is done playing'))
-      }
-    })
+    this.audio.play('cat')
   }
 }

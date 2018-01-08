@@ -13,12 +13,12 @@
       <ion-item>
         <ion-icon primary name="musical-notes" item-start></ion-icon>
         <ion-label item-content>Music</ion-label>
-        <ion-toggle item-end [(ngModel)]="playMusic" (click)="toggleMusic($event)"></ion-toggle>
+        <ion-toggle item-end [(ngModel)]="playMusic" (click)="toggleAudio('playMusic')"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-icon primary name="volume-up" item-start></ion-icon>
         <ion-label item-content>Sounds</ion-label>
-        <ion-toggle item-end [(ngModel)]="playSounds" (click)="toggleSounds($event)"></ion-toggle>
+        <ion-toggle item-end [(ngModel)]="playSounds" (click)="toggleAudio('playSounds')"></ion-toggle>
       </ion-item>
     </ion-item-group>
     <ion-item text-center>
