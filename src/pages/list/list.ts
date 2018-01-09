@@ -13,17 +13,23 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public audio: AudioServiceProvider) {
 
-    this.playMusic = audio.getOption('playMusic');
-    this.playSounds = audio.getOption('playSounds');
+    audio.getOption('playMusic', (val) => {
+      this.playMusic = val
+    })
+    audio.getOption('playSounds', (val) => {
+      this.playSounds = val
+    })
   }
 
   toggleAudio(option){
     if (option === 'playMusic') {
-      this.playMusic = this.audio.toggleAudio('playMusic')
-      // TODO toggleaudio.then...
+      this.audio.toggleAudio('playMusic', (val) => {
+        this.playMusic = val
+      })
     } else if (option === 'playSounds'){
-      this.playSounds = this.audio.toggleAudio('playSounds')
-      // TODO toggleaudio.then...
+      this.audio.toggleAudio('playSounds', (val) => {
+        this.playSounds = val
+      })
     }
   }
 

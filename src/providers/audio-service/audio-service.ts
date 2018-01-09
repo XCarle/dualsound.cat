@@ -28,32 +28,37 @@ export class AudioServiceProvider {
     })
   }
 
-  getOption(optionType) {
-    if (optionType !== 'playSounds' && optionType !== 'playMusic') {
-      return null
-    }
-
-    this.storage.get(optionType).then((val) => {
-      this.storage.set(optionType, !!val)
-      return !!val
+  getOption(optionType, done) {
+    var self = this
+    return new Promise(function (resolve, reject){
+      if (optionType !== 'playSounds' && optionType !== 'playMusic') {
+        done(null)
+      }
+      self.storage.get(optionType).then((val) => {
+        self.storage.set(optionType, !!val)
+        done(!!val)
+      })
     })
   }
 
-  toggleAudio(option) { // TODO : Make a promise
-    if (option !== 'playSounds' && option !== 'playMusic') {
-      return null
-    }
-
-    this.storage.get(option).then((getVal) => {
-      this.storage.set(option, !!!getVal).then( (setVal) => {
-        if (option === 'playMusic'){
-          setVal ?
-            this.audio.loop('bird') :
-            this.audio.stop('bird')
-        }
-        return setVal
+  toggleAudio(option, done) { // TODO : Make a promise
+    var self = this
+    return new Promise(function (resolve, reject){
+      if (option !== 'playSounds' && option !== 'playMusic') {
+        done(null)
+      }
+      self.storage.get(option).then((getVal) => {
+        self.storage.set(option, !!!getVal).then( (setVal) => {
+          if (option === 'playMusic'){
+            setVal ?
+              self.audio.loop('bird') :
+              self.audio.stop('bird')
+          }
+          done(setVal)
+        })
       })
     })
+
   }
 
   play(option) {
